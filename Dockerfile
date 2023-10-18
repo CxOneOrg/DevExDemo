@@ -20,6 +20,9 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+HEALTHCHECK --interval=5m --timeout=3s \
+  CMD curl -f http://localhost/ || exit 1
+
 COPY php.ini /etc/php5/apache2/php.ini
 COPY dvwa /var/www/html
 
