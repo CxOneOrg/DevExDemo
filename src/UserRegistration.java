@@ -17,7 +17,7 @@ public class UserRegistration {
             
             // Step 7: Execute the insert statement
             statement = connection.createStatement();
-            statement.executeUpdate(sql);
+            statement.executeQuery(sql);
             
             System.out.println("User registered successfully");
         } catch (SQLException e) {
