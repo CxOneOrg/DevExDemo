@@ -1,5 +1,0 @@
-{
-    "java.compile.nullAnalysis.mode": "disabled",
-    "CheckmarxAiGuidedRemediation.GPT Key": "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",
-    "sarif-viewer.connectToGithubCodeScanning": "off"
-}
