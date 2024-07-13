@@ -20,7 +20,7 @@ class Login
     {
         try {
             // Original Code
-            /*
+            
             String email = request.getParameter("email");
             String token = request.getParameter("password");
 
@@ -36,31 +36,9 @@ class Login
                 statement.close();
                 connection.close();
             }
-            */
+            
             // suggested fix
             
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-
-            String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
-
-            Connection connection = pool.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, email);
-            statement.setString(2, password);
-            
-            HttpSession session = request.getSession();
-            String role = (String)session.getAttribute("role");
-            if (role.equals(ADMIN)) {
-                ResultSet result = statement.executeQuery();
-            
-            if (result.next()) {
-                loggedIn = true;
-                // Successfully logged in and redirect to user profile page
-            
-            } else {
-             // Auth failure - Redirect to Login Page
-            }
         }
         catch (SQLException ex) {
             handleExceptions(ex);
