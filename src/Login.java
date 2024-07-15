@@ -20,7 +20,7 @@ class Login
     {
         try {
             // Original Code
-            /*
+            
             String email = request.getParameter("email");
             String token = request.getParameter("password");
 
@@ -36,7 +36,7 @@ class Login
                 statement.close();
                 connection.close();
             }
-            */
+            
 
         }
         catch (SQLException ex) {
