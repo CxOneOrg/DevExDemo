@@ -9,9 +9,4 @@ class xss_blank5 {
         // Simulate displaying the search term on a resulting page
         System.out.println("Search Term: " + searchTerm);
     }
-
-    // Method to sanitize input to prevent XSS attacks
-    private static String sanitizeInput(String input) {
-        return input.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
-    }
 }
