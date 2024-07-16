@@ -20,7 +20,7 @@ class Login
     {
         try {
             // Original Code
-            
+            /* 
             String email = request.getParameter("email");
             String token = request.getParameter("password");
 
@@ -36,7 +36,21 @@ class Login
                 statement.close();
                 connection.close();
             }
-            
+           */ 
+          String email = request.getParameter("email");
+          String password = request.getParameter("password");
+  
+          String sql = "select * from users where email = ? and password = ? ";
+  
+          Connection connection = pool.getConnection();
+          PreparedStatement preparedStatement = connection.prepareStatement(sql);
+          preparedStatement.setString(1, email);
+          preparedStatement.setString(2, password);
+  
+          HttpSession session = request.getSession();
+          String role = (String)session.getAttribute("role");
+          if (role.equals(ADMIN)) {
+              ResultSet result = preparedStatement.executeQuery();
 
         }
         catch (SQLException ex) {
