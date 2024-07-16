@@ -36,22 +36,25 @@ class Login
             //     statement.close();
             //     connection.close();
             // }
-            String email = request.getParameter("email");
-        String token = request.getParameter("password");
 
-        String sql = "select * from users where email = ? and password = ?";
+            String email = request.getParameter("email");
+        String password = request.getParameter("password"); //SAST Node #0 (input): "password" ()
+
+        // we can use PreparedStatement instead of statement to mitigate Sql injection
+        String updateStatement = "SELECT * from users WHERE email = ? and password = ?"; //SAST Node #3: getParameter () //SAST Node #4: updateStatement ()
 
         Connection connection = pool.getConnection();
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, email);
-        ps.setString(2, token);
+        PreparedStatement preparedStatement = connection.prepareStatement(updateStatement);
+        preparedStatement.setString(1, email);
+        preparedStatement.setString(2, password);
 
         HttpSession session = request.getSession();
         String role = (String)session.getAttribute("role");
         if (role.equals(ADMIN)) {
-            ResultSet result = ps.executeQuery();
-
-        }
+            ResultSet result = preparedStatement.executeQuery(); //SAST Node #5: executeQuery () //SAST Node #6 (output): executeQuery ()
+            // method continues ...
+        } 
+            
         catch (SQLException ex) {
             handleExceptions(ex);
         }
