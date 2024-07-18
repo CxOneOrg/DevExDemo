@@ -21,18 +21,34 @@ class Login
         try {
             //Original Code
             
-            String email = request.getParameter("email");
-            String token = request.getParameter("password");
+            // String email = request.getParameter("email");
+            // String token = request.getParameter("password");
 
-            String sql = "select * from users where (email ='" + email +"' and password ='" + token + "')";
+            // String sql = "select * from users where (email ='" + email +"' and password ='" + token + "')";
+
+            // Connection connection = pool.getConnection();
+            // Statement statement = connection.createStatement();
+            
+            // HttpSession session = request.getSession();
+            // String role = (String)session.getAttribute("role");
+            // if (role.equals(ADMIN)) {
+            //     ResultSet result = statement.executeQuery(sql);
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+
+            String sql = "select * from users where email =? and password =?";
 
             Connection connection = pool.getConnection();
-            Statement statement = connection.createStatement();
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            
+            pstmt.setString(1, email);
+            pstmt.setString(2, password);
+            
             
             HttpSession session = request.getSession();
             String role = (String)session.getAttribute("role");
             if (role.equals(ADMIN)) {
-                ResultSet result = statement.executeQuery(sql);
+                ResultSet result = pstmt.executeQuery();
                 statement.close();
                 connection.close();
             }
