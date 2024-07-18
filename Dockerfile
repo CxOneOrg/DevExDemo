@@ -2,9 +2,6 @@ FROM debian:9.2
 
 LABEL maintainer "opsxcq@strm.sh"
 
-USER jbrotsos
-WORKDIR /home/jbrotsosS
-
 RUN apt-get update && \
     apt-get upgrade -y && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
