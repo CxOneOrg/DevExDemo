@@ -20,6 +20,9 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+USER jbrotsos
+WORKDIR /home/jbrotsos
+
 #HEALTHCHECK --interval=5m --timeout=3s \
 #  CMD curl -f http://localhost/ || exit 1
 
